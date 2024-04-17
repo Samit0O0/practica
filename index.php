@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Bucle While 2</h1>
+<h1>holaaaaaaaaaaaaa</h1>
 <form action="index.php" method="post">
 ¿Cuantas veces?
 <input type="text" name="number">
