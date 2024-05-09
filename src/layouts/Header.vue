@@ -14,7 +14,8 @@ const store = computed(() => useAuthStore())
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 flex justify-between items-center p-5 bg-base-200 border-b-1 border-gray-700">    <div class="flex items-center">
+  <header class="sticky top-0 z-40 flex justify-between items-center p-5 bg-[#010c41] border-b-1 border-gray-700">    
+    <div class="flex items-center">
       <button
         @click="isOpen = true; isClose = true"
         class="focus:outline-none lg:hidden"
