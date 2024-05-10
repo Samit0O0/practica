@@ -54,39 +54,40 @@ const { search, inputValue, insertValue, changeValue, result, hidden, popupStatu
 
     </section>
 
+  </main>
 
-    <section id="banner">
+  <section id="banner" v-if="Object.keys(result).length == 0">
         <article>
               <h2>Ingrese su numero de cedula para registrar el voto.</h2>
         </article>
-            <img src="@/assets/banner.svg" alt="">
+            <img class="w-auto h-auto" src="@/assets/banner.svg" alt="">
     </section>
-  </main>
 </template>
 
 
 <style scoped>
 
 #reportes{
-  background-image:url("@/assets/bg.svg") ;
+  background-image:url("@/assets/bg.svg");
   min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 80%;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
-
 #banner {
   display: grid;
   position: absolute;
-  width: 100%;
+  width: 85%;
   height: 150px;
   grid-template-columns: 1fr 1fr;
   bottom: 270px;
+  margin-left: -120px;
 }
 
 #banner article:first-child{
   background-color: #010c41;
-  width: 960px;
+  width: 980px;
 }
 #banner article{
   color: white;
@@ -95,6 +96,7 @@ const { search, inputValue, insertValue, changeValue, result, hidden, popupStatu
   display: grid;
   place-items: center;
   padding: 30px
+  
 }
 
 #banner article h2{
@@ -128,7 +130,7 @@ form {
   margin: 0px auto;
 }
 
-@media screen and (max-width 400px) {
+@media screen and (max-width : 768px) {
   form {
   width: 80%;
   margin: 0px auto;
