@@ -2,53 +2,115 @@
 import useReportes from '../composables/useReportes';
 import CardInfoUser from '../components/CardInfoUser.vue';
 
-const { search, inputValue, insertValue, changeValue, result } = useReportes()
 
+const { search, inputValue, insertValue, changeValue, result, hidden, popupStatus, popup, alerta} = useReportes()
 </script>
 
 <template>
+
+
   <main id="reportes">
-    <img alt="Vue logo" src="@/assets/logo.svg"  class="mx-auto h-48"/>  
+    <section
+    class="absolute bg-black bg-opacity-30 w-full h-full z-50 grid place-content-center top-0 left-0 cursor-pointer"
+    @click="(e) => hidden(e)" ref="popup">
+    <img class="h-90 bg-white rounded-lg fade" src="@/assets/msg.jpeg" alt="" v-if="popupStatus == 0">
+
+    <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl w-96 fade" v-else-if="popupStatus == 1">
+      <h3 class="text-slate-900 dark:text-white text-base font-medium capitalize mx-auto p-10">Ingrese la hora del voto:</h3>
+      <input type="datetime-local" name="" id="">
+      <button class=" bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-2 px-10 rounded-3xl mx-auto block my-5" @click="() => alerta('Enviado', 'se ha enviado el registro', 'success')">Registrar</button>
+    </article>
+
+    <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl w-96 fade" v-else-if="popupStatus == 2">
+      <h3 class="text-slate-900 dark:text-white text-base font-medium capitalize mx-auto py-10">Ingrese la hora del voto:</h3>
+      <input type="datetime-local" name="" id="">
+      <h3 class="text-slate-900 dark:text-white text-base font-medium capitalize mx-auto p-5">Justifique:</h3>
+      <input type="text" placeholder="justifique...">
+      <button class=" bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-2 px-10 rounded-3xl mx-auto block my-5" @click="() => alerta('Enviado', 'se ha enviado el registro', 'success')">Registrar</button>
+    </article>
+  </section>
+
+    <img alt="Vue logo" src="@/assets/logo.svg" class="mx-auto h-48" />
     <form @submit.prevent="search">
       <label>Ingrese una cedula: </label>
       <article id="busqueda">
-        <select class="w-20" name="tipopersona" @change="insertValue">
-          <option value="">seleccionar</option>
-          <option value="V">V</option>
-          <option value="E">E</option>
+        <select class="w-20" name="tipopersona" @change="insertValue" disabled>
+          <option value="V">V-</option>
+          <option value="E">E-</option>
         </select>
-        <input class="rounded-lg border-2 border-green-500" type="text" name="busqueda" v-model="inputValue" placeholder="Ingrese la cedula" @input="changeValue">
+        <input class="rounded-lg border-2 border-green-500" type="text" name="busqueda" v-model="inputValue"
+          placeholder="Ingrese la cedula" @input="changeValue">
         <button>
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
-
-        <div id="globo">
-          <ul>
-            <li>No escribas</li>
-            <li>Sin letras</li>
-            <li>No escribas</li>
-            <li>Sin letras</li>
-          </ul>
-        </div>
       </article>
     </form>
 
     <section class="results my-10" v-if="Object.keys(result).length > 0">
 
-      <CardInfoUser :result="result[0]" title="Datos personales" icon="fa-solid fa-user"/>
-      <CardInfoUser :result="result[1]" title="Ubicacion" icon="fa-solid fa-location-pin"/>
-      <CardInfoUser :result="[result[0].id]" title="Registro" icon="fa-solid fa-check-to-slot"/>
+      <CardInfoUser :result="result[0]" title="Datos personales" icon="fa-solid fa-user" />
+      <CardInfoUser :result="result[1]" title="Ubicacion" icon="fa-solid fa-location-dot" />
+      <CardInfoUser :result="[result[0].id]" title="Registro" icon="fa-solid fa-check-to-slot" :hidden="hidden" />
 
     </section>
 
+
+    <section id="banner">
+        <article>
+              <h2>Ingrese su numero de cedula para registrar el voto.</h2>
+        </article>
+            <img src="@/assets/banner.svg" alt="">
+    </section>
   </main>
 </template>
 
 
 <style scoped>
-#reportes {
-  height: 90vh;
+
+#reportes{
+  background-image:url("@/assets/bg.svg") ;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
 }
+
+#banner {
+  display: grid;
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  grid-template-columns: 1fr 1fr;
+  bottom: 270px;
+}
+
+#banner article:first-child{
+  background-color: #010c41;
+  width: 960px;
+}
+#banner article{
+  color: white;
+  height: 80%;
+  border-radius: 0% 30% 30% 0%;
+  display: grid;
+  place-items: center;
+  padding: 30px
+}
+
+#banner article h2{
+  font-size: 50px;
+  font-weight: bold;
+}
+
+#banner article img{
+  justify-items: left;
+}
+
+
+#banner article img{
+  justify-items: left;
+}
+
 
 #FormContainer {
   width: 30%;
@@ -66,20 +128,18 @@ form {
   margin: 0px auto;
 }
 
+@media screen and (max-width 400px) {
+  form {
+  width: 80%;
+  margin: 0px auto;
+}
+}
+
 form label {
   margin-bottom: 15px;
   display: block;
   font-size: 20px;
   text-indent: 20px;
-}
-
-#globo {
-  position: absolute;
-  top: -40px;
-  opacity: 0;
-  right: -100px;
-  transition: .5s ease;
-  border: 1px solid rgb(196, 196, 196);
 }
 
 #busqueda {
@@ -89,7 +149,7 @@ form label {
 
 #busqueda button {
   position: absolute;
-  right: 30px;
+  right: 25px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 12px;
@@ -104,10 +164,6 @@ form label {
 
 #busqueda input:hover~button {
   background-color: #0057b3;
-}
-
-#busqueda input:hover~#globo {
-  opacity: 1;
 }
 
 
@@ -134,43 +190,12 @@ form .cosultar:hover {
   cursor: pointer;
 }
 
-.results{
+.results {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 20px;
 }
 
-.fade {
-  -webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-  animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-}
 
-@-webkit-keyframes slide-bottom {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0px);
-    opacity: 0;
-  }
 
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0px);
-    opacity: 1;
-
-  }
-}
-
-@keyframes slide-bottom {
-  0% {
-    -webkit-transform: translateY(-100px);
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
 </style>
