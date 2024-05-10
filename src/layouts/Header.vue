@@ -14,7 +14,7 @@ const store = computed(() => useAuthStore())
 </script>
 
 <template>
-  <header class="sticky top-0 z-40 flex justify-between items-center p-5 bg-[#010c41] border-b-1 border-gray-700">    
+  <header class="sticky top-0 z-40 flex justify-between items-center p-5 bg-[#010c41] border-b-1 border-gray-700 text-white">    
     <div class="flex items-center">
       <button
         @click="isOpen = true; isClose = true"
@@ -110,9 +110,9 @@ const store = computed(() => useAuthStore())
         </svg>
       </button-->
       
-      <div class="relative">
+     <!--  <div class="relative">
         <SelectTheme />
-      </div>
+      </div> -->
       <div class="relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
@@ -137,7 +137,7 @@ const store = computed(() => useAuthStore())
         <div
           v-show="dropdownOpen"
           @click="dropdownOpen = false"
-          class="absolute right-0 mt-2 py-2 w-48 bg-base-100 rounded-md shadow-xl z-20"
+          class="absolute right-0 mt-2 py-2 w-48 bg-[#010c41] rounded-md shadow-xl z-20"
         >
 
           <AppLink

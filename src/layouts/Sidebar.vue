@@ -9,7 +9,7 @@ const store = useAuthStore()
 </script>
 
 <template>
-  <div class="flex bg-base-100" v-if="store.authUser">
+  <div class="flex bg-[#010c41]" v-if="store.authUser">
     <!-- Backdrop -->
     <div
       :class="isOpen ? 'block' : 'hidden'"
@@ -19,13 +19,13 @@ const store = useAuthStore()
     <!-- End Backdrop -->
     <div
       :class="isOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-      class="bg-base-200 fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-0 block lg:hidden"
+      class="bg-[#010c41] fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-0 block lg:hidden"
     >
       <RecursiveMenu /> 
     </div>
     <div
       :class="!isClose ? 'translate-x-0 ease-out w-full' : '-translate-x-full ease-in w-0'"
-      class="bg-base-200 fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-x-0 hidden lg:block"
+      class="bg-[#010c41] fixed z-30 inset-y-0 left-0 transition duration-300 transform overflow-y-auto lg:static lg:inset-x-0 hidden lg:block"
     >
       <RecursiveMenu />
     </div>

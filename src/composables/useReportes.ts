@@ -1,31 +1,32 @@
 import type { UserData } from "@/types/UserData"
 import { ref } from "vue"
+import Http from "@/utils/Http";
+
 
 export default () => {
 
     const result: UserData = ref({})
     const inputValue = ref('')
 
-    const search = (e: FormDataEvent) => {
+    const search = async (e: FormDataEvent) => {
         e.preventDefault()
         const form = new FormData(e.currentTarget as HTMLFormElement)
-        if (inputValue.value.length == 0) return
+        let cedula: any = form.get("busqueda")
+        result.value = {}
 
-        const user = {
-            Nombre_Completo: "MIGUEL ANTONIO MADRIZ MEDINA",
-            cedula: 6886465,
-            status: "No", 
-            ubicacion: "001 DIRECCIÓN GENERAL DEL DESPACHO (DGD)",
-            estado: "DTTO. CAPITAL",
-            municipio: "MP. BLVNO LIBERTADOR",
-            parroquia: "PQ. 23 DE ENERO",
-            centro: "CENTRO DE EDUCACIÓN INICIAL NACIONAL BOLÍVAR Y TOVAR",
-            direccion: "SECTOR ZONA E DERECHA CALLE BELLA VISTA. IZQUIERDA CAMINO BLOQUE 33 Y 34 PEQUE#O. FRENTE CAMINO BLOQUE 35 ADYACENTE AL MODULO BARRIO ADENTRO CASA"
-        }
+        if (cedula.length == 0) return
 
-        result.value = user
-        console.log(form.get("busqueda"))
-        console.log(form.get("tipopersona"))
+        cedula = cedula.replace(/[.]/g, "")
+
+        //const {data} = await Http.get("/api/users/2");
+        fetch(`http://10.90.20.129:8001/api/registro/search/${cedula}`)
+            .then(res => {
+                if(res.status == 404) return alert("No se encontro el usuario")
+                
+                res.json()
+                .then(data => result.value = data)
+            })
+            
     }
 
     const insertValue = (e: any) => {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useReportes from '../composables/useReportes';
+import CardInfoUser from '../components/CardInfoUser.vue';
 
 const { search, inputValue, insertValue, changeValue, result } = useReportes()
 
@@ -34,61 +35,10 @@ const { search, inputValue, insertValue, changeValue, result } = useReportes()
 
     <section class="results my-10" v-if="Object.keys(result).length > 0">
 
-      <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl  fade">
-        <div>
-          <span class="inline-flex items-center justify-center p-2 bg-[#010c41] rounded-md shadow-lg">
-              <font-awesome-icon class="h-6 w-6 text-white" icon="fa-solid fa-user" />
-              <h2 class="mx-3 text-white">Datos personales:</h2>
-          </span>
-        </div>
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Nombre Completo:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.Nombre_Completo }}</p>
+      <CardInfoUser :result="result[0]" title="Datos personales" icon="fa-solid fa-user"/>
+      <CardInfoUser :result="result[1]" title="Ubicacion" icon="fa-solid fa-location-pin"/>
+      <CardInfoUser :result="[result[0].id]" title="Registro" icon="fa-solid fa-check-to-slot"/>
 
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">cedula:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.cedula }}</p>
-
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Ubicacion administrativa:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.ubicacion }}</p>
-
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Centro de votación:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.centro }}</p>
-      </article>
-
-      <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl fade">
-        <div>
-          <span class="inline-flex items-center justify-center p-2 bg-[#010c41] rounded-md shadow-lg">
-              <font-awesome-icon class="h-6 w-6 text-white" icon="fa-solid fa-location-pin" />
-              <h2 class="mx-3 text-white">Ubicacion</h2>
-          </span>
-        </div>
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Estado:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.estado }}</p>
-
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Parroquia:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.parroquia }}</p>
-
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Municipio:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.municipio }}</p>
-
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">Direccion:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.direccion }}</p>
-      </article>
-
-
-      <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl  fade">
-        <div>
-          <span class="inline-flex items-center justify-center p-2 bg-[#010c41] rounded-md shadow-lg">
-              <font-awesome-icon class="h-6 w-6 text-white" icon="fa-solid fa-check-to-slot" />
-              <h2 class="mx-3 text-white">registro</h2>
-          </span>
-        </div>
-        <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">¿Ha votado?:</h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">{{ result.status }}</p>
-        <div class="hg-30 grid grid-cols-2 gap-1">
-          <button class=" bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-5 px-10 rounded-3xl  my-8 ">registrar</button>
-          <button class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-5 px-10 rounded-3xl my-8">No votó</button>
-        </div>
-      </article>
     </section>
 
   </main>
@@ -139,7 +89,7 @@ form label {
 
 #busqueda button {
   position: absolute;
-  right: 80px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 12px;

@@ -14,19 +14,19 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/option-one",
     name: "option-one",
-    //meta: { middleware: [auth] },
+    meta: { middleware: [auth] },
     component: () => import("@/views/OptionOne.vue").then(m => m.default)
   },
   {
     path: "/option-two",
     name: "option-two",
-    //meta: { middleware: [auth] },
+    meta: { middleware: [auth] },
     component: () => import("@/views/OptionTwo.vue").then(m => m.default)
   },
   {
     path: "/option-three",
     name: "option-three",
-    //meta: { middleware: [auth] },
+    meta: { middleware: [auth] },
     component: () => import("@/views/OptionThree.vue").then(m => m.default)
   },
   ...AuthRoutes.map(route => route),
