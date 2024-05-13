@@ -13,9 +13,9 @@ const layout = computed(
 <template>
   <component :is="layout">
     <router-view v-slot="{Component}">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" :key="$route.path"></component>
-      </transition>
+      <component :is="Component" :key="$route.path"></component>
+
+      
     </router-view>
   </component>
 </template>
@@ -30,4 +30,10 @@ const layout = computed(
   .fade-leave-to{
     opacity:0;
   }
+
+  /*
+   <transition name="fade" mode="out-in">
+        <component :is="Component" :key="$route.path"></component>
+      </transition> 
+  */
 </style>

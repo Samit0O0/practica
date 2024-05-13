@@ -12,14 +12,14 @@ const storeAuth = computed(() => useAuthStore())
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/option-one",
-    name: "option-one",
+    path: "/reporte",
+    name: "reporte",
     meta: { middleware: [auth] },
-    component: () => import("@/views/OptionOne.vue").then(m => m.default)
+    component: () => import("@/views/Reporte.vue").then(m => m.default)
   },
   {
-    path: "/option-two",
-    name: "option-two",
+    path: "/personal",
+    name: "personal",
     meta: { middleware: [auth] },
     component: () => import("@/views/OptionTwo.vue").then(m => m.default)
   },
