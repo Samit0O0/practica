@@ -11,7 +11,7 @@ export default () => {
         const form = new FormData(e.currentTarget as HTMLFormElement)
         let cedula: any = form.get("busqueda")
         if (cedula.length == 0) return
-     
+    
         cedula = cedula.replace(/[.V-]/g, "")
         const resultado: any = personas.value.find(element => element.cedula == cedula)
 

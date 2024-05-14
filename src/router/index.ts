@@ -12,6 +12,7 @@ const storeAuth = computed(() => useAuthStore())
 
 const routes: Array<RouteRecordRaw> = [
   {
+
     path: "/reporte",
     name: "reporte",
     meta: { middleware: [auth] },
