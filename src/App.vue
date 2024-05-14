@@ -13,9 +13,11 @@ const layout = computed(
 <template>
   <component :is="layout">
     <router-view v-slot="{Component}">
-      <component :is="Component" :key="$route.path"></component>
+   <transition name="fade" mode="out-in">
 
-      
+      <component :is="Component" :key="$route.path"></component>
+    </transition> 
+
     </router-view>
   </component>
 </template>
@@ -23,7 +25,7 @@ const layout = computed(
 <style lang="css" scoped>
   .fade-enter-active,
   .fade-leave-active{
-    transition: opacity 0.3s;
+    transition: opacity 0.2s;
   }
 
   .fade-enter-from,

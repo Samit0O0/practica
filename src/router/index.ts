@@ -24,10 +24,17 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/OptionTwo.vue").then(m => m.default)
   },
   {
-    path: "/option-three",
-    name: "option-three",
+    path: "/reporte/oneVote",
+    name: "oneVote",
     meta: { middleware: [auth] },
-    component: () => import("@/views/OptionThree.vue").then(m => m.default)
+    component: () => import("@/views/OneVote.vue").then(m => m.default)
+  },
+
+  {
+    path: "/reporte/masive",
+    name: "masive",
+    meta: { middleware: [auth] },
+    component: () => import("@/views/MasiveLoad.vue").then(m => m.default)
   },
   ...AuthRoutes.map(route => route),
   ...AuthorizationRoutes.map(route => route),

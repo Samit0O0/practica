@@ -4,14 +4,14 @@ const props = defineProps<{
     result: {},
     icon: string
     title: string
-    hidden?: Function
+    hidden?: Function,
+    envioData?: Function
 }>()
-
 
 </script>
 
 <template>
-      <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl z-10 fade">
+      <article class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl z-10 fadeout">
         <div class="grid place-content-center">
           <span class="inline-flex items-center justify-center p-2 bg-[#010c41] rounded-3xl shadow-lg w-96">
               <font-awesome-icon class="h-6 w-6 text-white" :icon='props.icon'/>
