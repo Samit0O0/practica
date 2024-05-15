@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CardInfoUser from '../components/Votos/CardInfoUser.vue';
+import Banner from '../components/Votos/Banner.vue';
 import SectionFloat from '../components/Votos/SectionFloat.vue';
 
 import { RouterLink } from 'vue-router';
@@ -20,6 +20,7 @@ import { RouterLink } from 'vue-router';
       </section>
     </section>
 
+    <Banner/>
   </main>
 </template>
 

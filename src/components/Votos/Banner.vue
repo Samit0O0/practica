@@ -1,7 +1,7 @@
 
 
 <template>
-        <section id="banner" class="relative" v-if="Object.keys(result).length == 0">
+        <section id="banner" class="relative">
         <article class="grid bg-[#010c41] p-30 h-96 relative z-10 rounded-r-full">
           <h2 class="text-white text-5xl font-bold">Ingrese su numero de cedula para registrar el voto.</h2>
         </article>
