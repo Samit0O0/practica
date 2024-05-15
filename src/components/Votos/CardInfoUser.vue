@@ -21,13 +21,17 @@ const props = defineProps<{
 
         <div v-for="key in Object.keys(result).filter(k => k !== 'id')" v-if=" Object.keys(result).length != 1">
             <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight capitalize">{{key.replace(/_/g, ' ')}}</h3>
-            <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm capitalize">{{ result[key] }}</p>
+            <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm capitalize">{{ key == "cédula" ? `V-${result[key].toLocaleString("es-ES")}` : result[key] }}</p>
         </div>
         
         <div v-else>
             <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">¿Ha votado?: </h3>
-        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">no</p>
-        <div class="hg-30 grid grid-cols-2 gap-1">
+        <div class="grid">
+          <p class="my-5 mx-auto">{{ result.registro_existente ? "Ya se registró su voto" : "No" }}.</p>
+          <font-awesome-icon icon="fa-solid fa-circle-check" class="text-green-600 h-32 mx-auto aling-center my-5" v-if="result.registro_existente"/>
+        </div>
+        
+        <div class="hg-30 grid grid-cols-2 gap-1" v-if="!result.registro_existente">
           <button name="si" class=" bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-2 px-10 rounded-3xl my-8 " @click="(e) => hidden(e as MouseEvent, 1)">Registrar</button>
           <button name="si" class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-3 px-10 rounded-3xl my-8" @click="(e) => hidden(e as MouseEvent, 2)">No votó</button>
         </div>

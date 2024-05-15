@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import useReportes from '../composables/useReportes';
 import CardInfoUser from '../components/Votos/CardInfoUser.vue';
+import SectionFloat from '../components/Votos/SectionFloat.vue';
+
 import { RouterLink } from 'vue-router';
 
-const {hidden, popup, popupStatus} = useReportes()
 </script>
 
 <template>
   <main id="reportes">
     <section id="form">
-      <section class="absolute bg-black bg-opacity-30 w-full h-full z-50 grid place-content-center top-0 left-0 cursor-pointer" @click="(e) => hidden(e)" ref="popup">
+      <SectionFloat>
         <img class="h-90 bg-white rounded-lg fadeout" src="@/assets/msg2.jpeg">
-      </section>
+      </SectionFloat>
       <img alt="" src="@/assets/logo-cne.svg" class="mx-auto h-48" />
     
       <section class="grid grid-cols-2 w-3/4 mx-auto gap-20 my-40">
         <RouterLink to="/reporte/oneVote" class="bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center" >Registrar un voto</RouterLink>
-        <RouterLink to="/reporte/masive" class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center">Cargar masivamente</RouterLink>
+        <RouterLink to="/reporte/masive" class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center">Cargar masiva</RouterLink>
       </section>
     </section>
 

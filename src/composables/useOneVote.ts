@@ -1,27 +1,17 @@
-import type { UserData } from "@/types/UserData"
-import {onMounted, ref } from "vue"
+import type { UserData } from "@/types/votos/UserData"
+import {ref } from "vue"
 import Http from "@/utils/Http";
-import {alerta} from "../utils/alert.ts"
+import {alerta} from "../utils/alert"
 
 
 export default () => {
 
-    const result: UserData = ref({})
-    const inputValue = ref('')
+    const popup = ref<HTMLElement>(null)
+    const result = ref({} as UserData)
     const popupStatus = ref(0)
-    const popup: HTMLElement = ref()
-    const Persona: any = ref(0)
 
-  
-    const search = async (e: FormDataEvent) => {
-        const form = new FormData(e.currentTarget as HTMLFormElement)
-        let cedula: any = form.get("busqueda")
-        result.value = {}
-        
-        if (cedula.length == 0) return
-
-        cedula = cedula.replace(/[.V-]/g, "")
-
+    const GetUser = async (cedula: string) => {
+        result.value = {} as UserData
         //const {data} = await Http.get("/api/users/2");
         fetch(`http://10.90.20.129:8001/api/registro/search/${cedula}`)
             .then(res => {
@@ -31,22 +21,17 @@ export default () => {
             })
     }
 
-    const changeValue = (e: any) => {
-        const newValue = e.target.value.replace(/[^0-9]/g, "");
-        const val = parseInt(newValue.slice(0, 8));
-        if (inputValue.value.length > 0) inputValue.value = isNaN(val) ? ""  : "V-" + val.toLocaleString("es-ES");
-        if (inputValue.value == "") result.value = {}
-    }
 
 
-    const hidden = (e?: MouseEvent, value?: number) => {
-        if (e && e.target.tagName === "SECTION") {
+
+    const hidden = (e?: PointerEvent, value?: number) => {
+        const target = e.target as HTMLElement
+        if (e && target.tagName === "SECTION") {
             popup.value.style.display = "none"
         } else {
-            if(e.target.tagName === "BUTTON" && e.target.name === "si") popupStatus.value = value            
+            if(target.tagName === "BUTTON" && target.name === "si") popupStatus.value = value            
             popup.value.style.display = "grid"
         }
-
     }
 
 
@@ -60,7 +45,6 @@ export default () => {
             persona_id: result.value[0].id 
         }
 
-        console.log(data.hora_voto)
           //const {data} = await Http.get("/api/users/2");
         fetch(`http://10.90.20.129:8001/api/registro/vote`,{
             method: "POST",
@@ -80,19 +64,15 @@ export default () => {
 
     const obtenerHoraActual = () => {
         const fechaActual = new Date();
-    
         // Extraer las horas, minutos y segundos
         const horas = fechaActual.getHours();
         const minutos = fechaActual.getMinutes();
-    
         // Devolver la hora formateada
         return `${horas}:${minutos.toString().padStart(2, '0')}`;
     }
 
     return {
-        search,
-        inputValue,
-        changeValue,
+        GetUser,
         result,
         hidden,
         popup,
