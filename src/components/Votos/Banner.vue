@@ -1,9 +1,14 @@
+<script setup lang="ts"> 
 
+const props = defineProps<{
+    text: string
+}>()
+</script>
 
 <template>
-        <section id="banner" class="relative">
+    <section id="banner" class="relative">
         <article class="grid bg-[#010c41] p-30 h-96 relative z-10 rounded-r-full">
-          <h2 class="text-white text-5xl font-bold">Ingrese su numero de cedula para registrar el voto.</h2>
+          <h2 class="text-white text-5xl font-bold te">{{ text }}</h2>
         </article>
           <img src="@/assets/banner.svg" alt="">
     </section>
@@ -16,12 +21,12 @@
 #banner{
   position: fixed;
   width: 100%;
-  height: 30vh;
-  bottom: 12%;
+  bottom: 0%;
+  overflow: hidden;
 } 
 
 #banner article{
-  width: 65%;
+  width: 67%;
   place-items: center;
 }
 
@@ -32,15 +37,16 @@
 #banner img{
   position: absolute;
   right: 0;
-  top:50%;
-  width: 40%;
-  transform: translateY(-50%);
+  top:47%;
+  width: 42%;
+  transform: translateY(-44%);
 }
 
 @media (max-width: 900px) {
   
   #banner{
     bottom: 18%;
+    overflow: auto;
   }
 
   #banner article{

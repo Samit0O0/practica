@@ -67,7 +67,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>  
+  <div class=" w-11/12 mx-auto">  
     <AppPageHeader> Menús </AppPageHeader>
     
     <div class="flex space-x-2">

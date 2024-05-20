@@ -1,31 +1,29 @@
 import { ref } from "vue"
 import {alerta} from "../utils/alert"
+import Http from "@/utils/Http/index"
 
 export default () => {
     const personas = ref([])
     const popup = ref()
     const popupStatus = ref(0)
-    const GetUser = (cedula: string) => {
-        let status = 200;
+
+    const GetUser = async (cedula: string) => {
         const resultado: any = personas.value.find(element => element.cedula == cedula)
         if (resultado) return alerta("Atención", "Esta cédula ya esta cargada", "info")
-        //const {data} = await Http.get("/api/users/2");
-        fetch(`http://10.90.20.129:8001/api/registro/grupal/search/${cedula}`)
-            .then(res => {
-                if (res.status == 404) status = res.status
-                res.json()
-                    .then(data => {
-                        if (res.status != 200) return alerta("Atención", data.msg, "info")
-                        personas.value.push(data)
-                    })
-            })
+
+            try {
+                const response = await Http.get(`/api/registro/grupal/search/${cedula}`);
+                personas.value.push(response.data)
+            } catch (error) {
+                if (error.response.status != 200) return alerta("Atención", error.response.data.msg, "info")
+            }
     }
 
     const DeleteEmpleado = (value:string) => {
         personas.value = personas.value.filter(element => element.cedula != value)
     }
 
-    const Envio_Datos = (e: FormDataEvent) => {
+    const Envio_Datos = async (e: FormDataEvent) => {
 
         const form = new FormData(e.currentTarget as HTMLFormElement)
         const data = {
@@ -35,44 +33,31 @@ export default () => {
             persona_ids: personas.value.map(element => element.id)
         }
 
-
-            //const {data} = await Http.get("/api/users/2");
-        fetch(`http://10.90.20.129:8001/api/registro/multiple-votes`,{
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(res => {
-                if (res.status == 201)  return alerta('Enviado', 'Se ha enviado el registro', 'success') 
-                    res.json()
-                .then(response => alerta("error", response.msg, "error"))
-                
-            })
-    }
-
-    const hidden = (e?: MouseEvent, value?: number) => {
-        const target = e.target as HTMLElement
-        
-        if (e && target.tagName === "SECTION") {
+        try {
+            const response = await Http.post("/api/registro/multiple-votes", data);
+            alerta('Enviado', response.data.msg, 'success') 
+        } catch (error) {
+            const {response} = error
+            alerta("error", response.data.msg, "error")
+        }
+        finally{
+            personas.value = []
             popup.value.style.display = "none"
-        } else {
-            if(target.tagName === "BUTTON" && target.name === "si") popupStatus.value = value            
-            popup.value.style.display = "grid"
         }
     }
 
-
-    const obtenerHoraActual = () => {
-        const fechaActual = new Date();
-        // Extraer las horas, minutos y segundos
-        const horas = fechaActual.getHours();
-        const minutos = fechaActual.getMinutes();
-        // Devolver la hora formateada
-        return `${horas}:${minutos.toString().padStart(2, '0')}`;
+    const hidden = (e?: PointerEvent, value?: number) => {
+        const target = e.target as HTMLElement
+        if (e && target.tagName === "SECTION") {
+            popup.value.style.display = "none"
+        } else {
+            if(target.tagName === "BUTTON") {
+                const button = e.target as HTMLButtonElement
+                if(button.name === "si")  popupStatus.value = value   
+            }         
+            popup.value.style.display = "grid"
+        }
     }
-
 
     return {
         personas,
@@ -82,6 +67,5 @@ export default () => {
         popup,
         Envio_Datos,
         popupStatus,
-        obtenerHoraActual
     }
 }

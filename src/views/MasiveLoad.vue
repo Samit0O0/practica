@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import useMasiveLoad from '@/composables/useMasiveLoad';
 import FormInput from '../components/Votos/FormInput.vue';
+import {obtenerHoraActual} from "@/utils/GetHora"
 
-const { personas, DeleteEmpleado, hidden, popup, GetUser, Envio_Datos, popupStatus, obtenerHoraActual} = useMasiveLoad()
+const { personas, DeleteEmpleado, hidden, popup, GetUser, Envio_Datos, popupStatus} = useMasiveLoad()
 </script>
 
 <template>
@@ -17,7 +18,6 @@ const { personas, DeleteEmpleado, hidden, popup, GetUser, Envio_Datos, popupStat
             <button class="bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-2 px-10 rounded-3xl mx-auto block my-5">Registrar</button>
         </form>
         </section>
-        <img alt="" src="@/assets/logo-cne.svg" class="mx-auto h-48" />
 
         <FormInput :FunGetUser="GetUser"/>
 
@@ -57,18 +57,3 @@ const { personas, DeleteEmpleado, hidden, popup, GetUser, Envio_Datos, popupStat
         </div>
     </main>
 </template>
-
-
-<style scoped>
-main{
-    width: 100%;
-    background-image:url("@/assets/bg.svg");
-    min-height: 90vh;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    margin:0 auto;
-}
-
-</style>

@@ -12,30 +12,29 @@ export default () => {
 
     const GetUser = async (cedula: string) => {
         result.value = {} as UserData
-        //const {data} = await Http.get("/api/users/2");
-        fetch(`http://10.90.20.129:8001/api/registro/search/${cedula}`)
-            .then(res => {
-                if (res.status == 404) return alerta("error", "No se encontro la cedula", "error")
-                res.json()
-                    .then(data => result.value = data)
-            })
+        try {
+            const res = await Http.get(`/api/registro/search/${cedula}`);
+            result.value = res.data
+        } catch (error) {
+            if (error.response.status != 200) return alerta("error", error.response.data.msg, "error")
+        }
     }
-
-
-
 
     const hidden = (e?: PointerEvent, value?: number) => {
         const target = e.target as HTMLElement
         if (e && target.tagName === "SECTION") {
             popup.value.style.display = "none"
         } else {
-            if(target.tagName === "BUTTON" && target.name === "si") popupStatus.value = value            
+            if(target.tagName === "BUTTON") {
+                const button = e.target as HTMLButtonElement
+                if(button.name === "si")  popupStatus.value = value   
+            }         
             popup.value.style.display = "grid"
         }
     }
 
 
-    const envioData = (e: FormDataEvent) => {
+    const envioData = async (e: FormDataEvent) => {
         const form = new FormData(e.currentTarget as HTMLFormElement)
 
         const data = {
@@ -45,30 +44,17 @@ export default () => {
             persona_id: result.value[0].id 
         }
 
-          //const {data} = await Http.get("/api/users/2");
-        fetch(`http://10.90.20.129:8001/api/registro/vote`,{
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(res => {
-            if (res.status == 201)  return alerta('Enviado', 'Se ha enviado el registro', 'success') 
-            res.json()
-            .then(response => alerta("error", response.msg, "error"))
-            
-        })
-    }
-
-
-    const obtenerHoraActual = () => {
-        const fechaActual = new Date();
-        // Extraer las horas, minutos y segundos
-        const horas = fechaActual.getHours();
-        const minutos = fechaActual.getMinutes();
-        // Devolver la hora formateada
-        return `${horas}:${minutos.toString().padStart(2, '0')}`;
+        try {
+            const response = await Http.post("/api/registro/vote", data);
+            alerta('Enviado', response.data.msg, 'success')
+        } catch (error) {
+            const {response} = error
+            alerta("error", response.data.msg, "error")
+        }
+        finally{
+            result.value = {} as UserData
+            popup.value.style.display = "none"
+        }
     }
 
     return {
@@ -79,6 +65,5 @@ export default () => {
         popupStatus,
         alerta,
         envioData,
-        obtenerHoraActual
     }
 }

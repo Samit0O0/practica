@@ -7,36 +7,24 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <main id="reportes">
+  <main>
     <section id="form">
       <SectionFloat>
         <img class="h-90 bg-white rounded-lg fadeout" src="@/assets/msg2.jpeg">
       </SectionFloat>
-      <img alt="" src="@/assets/logo-cne.svg" class="mx-auto h-48" />
-    
+      <!--<img alt="" src="@/assets/logo-cne.svg" class="mx-auto h-48" />-->
       <section class="grid grid-cols-2 w-3/4 mx-auto gap-20 my-40">
         <RouterLink to="/reporte/oneVote" class="bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center" >Registrar un voto</RouterLink>
-        <RouterLink to="/reporte/masive" class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center">Cargar masiva</RouterLink>
+        <RouterLink to="/reporte/masive" class="bg-[#010c41] hover:bg-[#ECA008] text-white font-bold py-3 px-10 rounded-3xl my-8 text-center">Registrar multiple votos</RouterLink>
       </section>
     </section>
 
-    <Banner/>
+    <Banner text="Seleccione una opción para registrar los votos de las personas"/>
   </main>
 </template>
 
 
 <style scoped>
-
-#reportes{
-  width: 100%;
-  background-image:url("@/assets/bg.svg");
-  min-height: 90vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  background-attachment: fixed;
-  margin:0 auto;
-}
 
 #busqueda input:hover~button {
   background-color: #0057b3;

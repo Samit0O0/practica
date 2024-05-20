@@ -27,7 +27,7 @@ const props = defineProps<{
         <div v-else>
             <h3 class="text-slate-900 dark:text-white mt-5 text-base font-medium tracking-tight">¿Ha votado?: </h3>
         <div class="grid">
-          <p class="my-5 mx-auto">{{ result.registro_existente ? "Ya se registró su voto" : "No" }}.</p>
+          <p class="my-5 mx-auto">{{ result.registro_existente ? "Voto registrado" : "No" }}.</p>
           <font-awesome-icon icon="fa-solid fa-circle-check" class="text-green-600 h-32 mx-auto aling-center my-5" v-if="result.registro_existente"/>
         </div>
         

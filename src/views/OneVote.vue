@@ -2,9 +2,10 @@
 import useReportes from '../composables/useOneVote';
 import CardInfoUser from '../components/Votos/CardInfoUser.vue';
 import FormInput from '../components/Votos/FormInput.vue';
+import {obtenerHoraActual} from "@/utils/GetHora"
 
 
-const { GetUser, result, hidden, popupStatus, popup, obtenerHoraActual, envioData} = useReportes()
+const { GetUser, result, hidden, popupStatus, popup, envioData} = useReportes()
 </script>
 
 <template>
@@ -20,8 +21,6 @@ const { GetUser, result, hidden, popupStatus, popup, obtenerHoraActual, envioDat
             <button class="bg-[#ECA008] hover:bg-[#010c41] text-white font-bold py-2 px-10 rounded-3xl mx-auto block my-5">Registrar</button>
         </form>
       </section>
-      <img alt="" src="@/assets/logo-cne.svg" class="mx-auto h-48" />
-    
       <FormInput :FunGetUser="GetUser"/>
     </section>
     <section class="results my-10 grid grid-cols-2" v-if="Object.keys(result).length > 0">
@@ -36,12 +35,7 @@ const { GetUser, result, hidden, popupStatus, popup, obtenerHoraActual, envioDat
 <style scoped>
 #reportes{
   width: 100%;
-  background-image:url("@/assets/bg.svg");
   min-height: 90vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  background-attachment: fixed;
   margin:0 auto;
 }
 

@@ -19,18 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/Reporte.vue").then(m => m.default)
   },
   {
-    path: "/personal",
-    name: "personal",
-    meta: { middleware: [auth] },
-    component: () => import("@/views/OptionTwo.vue").then(m => m.default)
-  },
-  {
     path: "/reporte/oneVote",
     name: "oneVote",
     meta: { middleware: [auth] },
     component: () => import("@/views/OneVote.vue").then(m => m.default)
   },
-
   {
     path: "/reporte/masive",
     name: "masive",
