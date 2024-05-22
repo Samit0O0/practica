@@ -7,7 +7,7 @@ import DataTablesCore from 'datatables.net';
 
 DataTable.use(DataTablesCore);
 
-
+//
 const columns = [
   { data: 'icon' },
   { data: 'nombre_completo' },
@@ -16,7 +16,9 @@ const columns = [
 ];
 
 const options = {
-  info: "hola" 
+  language: {
+    search: "Buscar"
+  }
 }
 
 const props = defineProps<{
