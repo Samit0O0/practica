@@ -2,6 +2,7 @@ import {onMounted, ref } from "vue"
 import Http from "@/utils/Http/index"
 import Swal from "sweetalert2";
 import {alerta} from "../utils/alert"
+import {GetIcons} from "../utils/icons"
 
 export  default () => {
 
@@ -10,7 +11,18 @@ export  default () => {
     const GetEmployes = async () => {
                 const data = await Http.get("/api/registro");
                 const response = data.data
-                employees.value = response
+                const InfoMaped = response.map(element => {
+                    return {
+                        ...element,
+                        cedula:`V-${element.cedula.toLocaleString("es-ES")}`,
+                        icon: GetIcons(element.voto)
+                    } 
+                })
+
+                employees.value = InfoMaped
+
+                console.log(InfoMaped)
+
     }
 
 

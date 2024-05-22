@@ -13,7 +13,6 @@ import {
   LinearScale
 } from 'chart.js'
 
-import { Bar, Pie, Doughnut } from 'vue-chartjs'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
@@ -82,6 +81,3 @@ const {DatosResumen, primerBarra, PieData} = useDashboard()
     }
     }
 </style>
-
-{{ store.authUser ? store.authUser.name : '' }}
-/* */

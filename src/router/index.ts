@@ -30,6 +30,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { middleware: [auth] },
     component: () => import("@/views/MasiveLoad.vue").then(m => m.default)
   },
+  {
+    path: "/config",
+    name: "config",
+    meta: { middleware: [auth] },
+    component: () => import("@/views/LoadExel.vue").then(m => m.default)
+  },
   ...AuthRoutes.map(route => route),
   ...AuthorizationRoutes.map(route => route),
   ...UserRoutes.map(route => route)

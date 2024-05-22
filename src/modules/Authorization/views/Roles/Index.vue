@@ -43,7 +43,6 @@ const load = (newParams: object) => {
 const { 
     route,
     router,
-
     setSearch,
     setSort,
 } = useTableGrid(data, "/roles")

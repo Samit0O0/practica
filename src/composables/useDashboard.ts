@@ -14,19 +14,19 @@ export default () => {
         DatosResumen.value = response.data
 
         primerBarra.value = {
-            labels: [response.data.a[0], response.data.b[0], response.data.c[0], response.data.d[0], response.data.e[0]],
+            labels: [ response.data.b[0], response.data.c[0], response.data.d[0], response.data.e[0]],
             datasets: [{ 
               label: 'Total',
-              data: [response.data.a[1], response.data.b[1], response.data.c[1], response.data.d[1], response.data.e[1]],
+              data: [ response.data.b[1], response.data.c[1], response.data.d[1], response.data.e[1]],
               backgroundColor: ["#ECA008"],
           }],
           }
 
         PieData.value = {
-          labels: [response.data.a[0], response.data.b[0], response.data.c[0], response.data.d[0], response.data.e[0]],
+          labels: [ response.data.b[0], response.data.c[0], response.data.d[0], response.data.e[0]],
           datasets: [{
             label: 'Vote Results',
-            data: [response.data.a[1], response.data.b[1], response.data.c[1], response.data.d[1], response.data.e[1]],
+            data: [ response.data.b[1], response.data.c[1], response.data.d[1], response.data.e[1]],
             backgroundColor: [
               '#ECA008',
               "#010c41",

@@ -27,7 +27,21 @@ export default [{
     name: "dashboard",
     meta: { middleware: [auth], layout: "default" },
     component: () => import("@/modules/Auth/views/Dashboard.vue").then(m => m.default)
-}, {
+}, 
+{
+    path: "/dashboard2",
+    name: "dashboard2",
+    meta: { middleware: [auth], layout: "default" },
+    component: () => import("@/modules/Auth/views/Dash-modo-serio.vue").then(m => m.default)
+}, 
+
+{
+    path: "/dashboard3",
+    name: "dashboard3",
+    meta: { middleware: [auth], layout: "default" },
+    component: () => import("@/modules/Auth/views/Dashboard-Carnaval.vue").then(m => m.default)
+}, 
+{
     path: "/about",
     name: "About",
     meta: { middleware: [guest], layout: "empty" },

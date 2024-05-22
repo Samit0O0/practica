@@ -13,11 +13,11 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js'
-import { Bar, Doughnut, Pie, Line} from 'vue-chartjs'
+import { Bar, Doughnut, Pie} from 'vue-chartjs'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
 
-const { DatosResumen, primerBarra, PieData, submitHours, obtenerHoraActual, GetData} = useDashboard()
+const { DatosResumen, primerBarra, PieData, submitHours, GetData} = useDashboard()
 
 
 const ThirdArticle = ref(0)
@@ -120,7 +120,7 @@ section article{
 
 section article:last-child, section article:nth-child(2){
     display: grid;
-    grid-template-rows: 75% 20%;
+    grid-template-rows: 75% 25%;
 }
 
 section article canvas{

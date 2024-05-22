@@ -50,7 +50,8 @@
         :text="sending ? 'Iniciando sesión...' : 'Iniciar sesión'"
         :isDisabled='sending'
         class="text-gray-700 w-3/4 mb-4 my-8 bg-[#ECA008] rounded-md px-3 py-2 col-start-3 col-end-4 font-bold hover:bg-[#010c41] hover:w-4/5 text-white mx-auto cursor-pointer transition-all"
-      />
+        value="Iniciar sesion"
+        />
     <AppFlashMessage :error='error' />
   </form>
 </template>
